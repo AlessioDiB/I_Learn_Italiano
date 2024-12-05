@@ -1,0 +1,44 @@
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: lightblue;
+    height: 100%; /* Ensure body and html take up full height */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.content {
+    margin: 0 auto;
+    width: 400px;
+}
+
+
+table, td, th {
+    border: 1px solid #aaa;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%; /* Ensure table takes the full width of .content */
+    margin-top: 20px; /* Add spacing between the table and other elements */
+}
+
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#content {
+    width: 100%; /* Make the input field fit within the .content div */
+    box-sizing: border-box; /* Ensures padding and borders are included in width */
+}
