@@ -1,40 +1,26 @@
 {% extends 'base.html' %}
 
-{% block head %}
-<title>Task Master</title>
-{% endblock %}
-
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">Task Master</h1>
-    {% if tasks|length < 1 %}
-    <h4 style="text-align: center">There are no tasks. Create one below!</h4>
-    {% else %}
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{task.id}}">Update</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
+    <!-- Top-Right User Button -->
+    <button class="top-right-button">User</button>
 
-    <div class="form">
-        <form action="/" method="POST">
-            <input type="text" name="content" id="content">
-            <input type="submit" value="Add Task">
-        </form>
+    <!-- Header -->
+    <div class="header">
+        <h1>I Learn Italiano!</h1>
+    </div>
+
+    <!-- Middle Buttons -->
+    <div class="middle-buttons">
+        <a href="/learning"><button class="yellow-button">Learning</button></a>
+        <a href="/extra-resources"><button class="yellow-button">Extra Resources</button></a>
+        <a href="/practising"><button class="yellow-button">Practising</button></a>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="footer-buttons">
+        <a href="/about"><button class="blue-button">About</button></a>
+        <a href="/contact"><button class="blue-button">Contact</button></a>
     </div>
 </div>
 {% endblock %}

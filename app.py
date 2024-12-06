@@ -6,6 +6,66 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
+
+
+@app.route('/learning')
+def learning():
+    return render_template('learning.html')
+
+@app.route('/extra-resources')
+def extra_resources():
+    return render_template('extra_resources.html')
+
+@app.route('/practising')
+def practising():
+    return render_template('practising.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/user')
+def user():
+    return render_template('user.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
@@ -66,19 +126,11 @@ if __name__ == "__main__":
 
 
 
+-------------------------------------------------------------------
 
 
 
-
-
-
-
-
-
-
-
-
-'''
+older 
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime

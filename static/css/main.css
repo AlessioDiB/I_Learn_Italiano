@@ -2,43 +2,81 @@ body, html {
     margin: 0;
     font-family: sans-serif;
     background-color: lightblue;
-    height: 100%; /* Ensure body and html take up full height */
+    height: 100%;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    flex-direction: column;
+    justify-content: space-between; /* Space out top, middle, and bottom sections */
 }
 
-.content {
-    margin: 0 auto;
-    width: 400px;
+.navbar {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Add space between buttons */
+    margin-top: 30px;
 }
 
-
-table, td, th {
-    border: 1px solid #aaa;
+/* Top-Right Button */
+.top-right-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Green button */
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%; /* Ensure table takes the full width of .content */
-    margin-top: 20px; /* Add spacing between the table and other elements */
+.top-right-button:hover {
+    transform: scale(1.1);
+    background-color: #3e8e41;
 }
 
-
-th {
-    height: 30px;
+/* Middle Section Buttons (Yellow) */
+.middle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Add space between yellow buttons */
+    margin: 50px 0;
 }
 
-td {
-    text-align: center;
-    padding: 5px;
+.yellow-button {
+    background-color: #FFD700; /* Yellow buttons */
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.form {
-    margin-top: 20px;
+.yellow-button:hover {
+    transform: scale(1.1);
+    background-color: #f9c400;
 }
 
-#content {
-    width: 100%; /* Make the input field fit within the .content div */
-    box-sizing: border-box; /* Ensures padding and borders are included in width */
+/* Footer Section Buttons (Blue) */
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Add space between blue buttons */
+    margin-bottom: 30px;
+}
+
+.blue-button {
+    background-color: #87CEEB; /* Light blue buttons */
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.blue-button:hover {
+    transform: scale(1.1);
+    background-color: #71b8d6;
 }
