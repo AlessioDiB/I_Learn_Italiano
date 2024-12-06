@@ -1,23 +1,54 @@
-{% extends 'base.html' %}
+    <!-- index.html -->
+
+{% extends 'base_home.html' %}
+
+{% block head %}
+<title>I Learn Italiano! - Home</title>
+{% endblock %}
 
 {% block body %}
 <div class="content">
-    <!-- Top-Right User Button -->
-    <button class="top-right-button">User</button>
-
-    <!-- Header -->
-    <div class="header">
+    <!-- Header Section -->
+    <header class="main-header">
         <h1>I Learn Italiano!</h1>
-    </div>
+        <p class="subtitle">Your journey to speaking Italian starts here</p>
+    </header>
 
-    <!-- Middle Buttons -->
+    <!-- User Profile Button -->
+    {% if current_user %}
+        <div class="user-section">
+            <span>Welcome, {{ current_user.username }}!</span>
+            <a href="/logout"><button class="top-right-button">Logout</button></a>
+        </div>
+    {% else %}
+        <div class="user-section">
+            <a href="/login"><button class="top-right-button">Login</button></a>
+        </div>
+    {% endif %}
+
+    <!-- Main Learning Sections -->
     <div class="middle-buttons">
-        <a href="/learning"><button class="yellow-button">Learning</button></a>
-        <a href="/extra-resources"><button class="yellow-button">Extra Resources</button></a>
-        <a href="/practising"><button class="yellow-button">Practising</button></a>
+        <a href="/learning" class="card-link">
+            <div class="feature-card">
+                <h2>Learning</h2>
+                <p>Vocabulary, phrases, and grammar lessons</p>
+            </div>
+        </a>
+        <a href="/practising" class="card-link">
+            <div class="feature-card">
+                <h2>Practicing</h2>
+                <p>Interactive exercises to test your skills</p>
+            </div>
+        </a>
+        <a href="/extra-resources" class="card-link">
+            <div class="feature-card">
+                <h2>Extra Resources</h2>
+                <p>Additional materials to enhance your learning</p>
+            </div>
+        </a>
     </div>
 
-    <!-- Footer Buttons -->
+    <!-- Footer Navigation -->
     <div class="footer-buttons">
         <a href="/about"><button class="blue-button">About</button></a>
         <a href="/contact"><button class="blue-button">Contact</button></a>

@@ -1,11 +1,17 @@
+/* main.css */
+
 body, html {
     margin: 0;
     font-family: sans-serif;
-    background-color: lightblue;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Space out top, middle, and bottom sections */
+    justify-content: space-between;
+    background-image: url("{{ url_for('static', filename='images/homepage_web_draft_12.png') }}");; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .navbar {
@@ -79,4 +85,72 @@ body, html {
 .blue-button:hover {
     transform: scale(1.1);
     background-color: #71b8d6;
+}
+
+
+/* Add these to your existing main.css */
+
+.main-header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    font-size: 3em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.user-section {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature-card {
+    background-color: #FFD700; /* Changed from white to yellow */
+    border-radius: 15px;
+    padding: 25px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f9c400; /* Darker yellow on hover */
+}
+
+.feature-card h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.card-link {
+    text-decoration: none;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    background-color: transparent; /* Changed from semi-transparent white to transparent */
+    border-radius: 15px;
 }
