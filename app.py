@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -48,6 +49,25 @@ def contact():
 @app.route('/user')
 def user():
     return render_template('user.html')
+
+@app.route('/test')
+def test():
+    return """
+    <h1>Image Test</h1>
+    <img src="/static/homepage_web_draft_1.png" alt="test">
+    """
+
+@app.route('/check_image')
+def check_image():
+    import os
+    image_path = os.path.join(os.getcwd(), 'static', 'images', 'homepage_web_draft_1.png')
+    exists = os.path.exists(image_path)
+    return f"""
+    <h1>Image Check</h1>
+    <p>Image path: {image_path}</p>
+    <p>File exists: {exists}</p>
+    <img src="/static/images/homepage_web_draft_1.png" alt="test">
+    """
 
 if __name__ == '__main__':
     with app.app_context():

@@ -7,11 +7,12 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url("{{ url_for('static', filename='images/homepage_web_draft_12.png') }}");; 
+    background-image: url('/static/images/homepage_web_draft_1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-color: lightblue; /* Fallback color if image fails to load */
 }
 
 .navbar {
@@ -97,14 +98,13 @@ body, html {
 }
 
 .main-header h1 {
-    font-size: 3em;
-    color: #333;
+    font-size: 4.5em;  /* Increased from 3em */
+    color: #000000;
     margin-bottom: 10px;
 }
-
 .subtitle {
     font-size: 1.2em;
-    color: #666;
+    color: #050505;
 }
 
 .user-section {
