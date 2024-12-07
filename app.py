@@ -56,13 +56,7 @@ def contact():
 def user():
     return render_template('user.html')
 
-@app.route('/test')
-def test():
-    return """
-    <h1>Image Test</h1>
-    <img src="/static/homepage_web_draft_1.png" alt="test">
-    """
-
+'''
 @app.route('/check_image')
 def check_image():
     import os
@@ -74,6 +68,7 @@ def check_image():
     <p>File exists: {exists}</p>
     <img src="/static/images/homepage_web_draft_1.png" alt="test">
     """
+
 
 @app.route('/learning')
 def learning():
@@ -90,7 +85,7 @@ def vocabulary_lesson(lesson_number):
                          items=vocabulary_items, 
                          lesson_number=lesson_number)
 
-
+'''
 
 if __name__ == '__main__':
     with app.app_context():
