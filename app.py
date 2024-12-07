@@ -2,13 +2,19 @@ from flask import Flask, render_template, url_for, request, redirect, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User
+from models import db, User, VocabularyItem
 import os
+from routes.learning import learning
+from routes.practicing import practicing
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
+
+# Register blueprints
+app.register_blueprint(learning)
+app.register_blueprint(practicing)
 
 # User authentication helper
 def get_current_user():
@@ -69,7 +75,24 @@ def check_image():
     <img src="/static/images/homepage_web_draft_1.png" alt="test">
     """
 
+@app.route('/learning')
+def learning():
+    return render_template('learning.html')
+
+
+@app.route('/learning/vocabulary/<int:lesson_number>')
+def vocabulary_lesson(lesson_number):
+    if lesson_number not in [1, 2]:
+        return redirect(url_for('learning'))
+        
+    vocabulary_items = VocabularyItem.query.filter_by(lesson_number=lesson_number).all()
+    return render_template('vocabulary_lesson.html', 
+                         items=vocabulary_items, 
+                         lesson_number=lesson_number)
+
+
+
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        db.create_all()  # This creates the database tables
     app.run(debug=True)

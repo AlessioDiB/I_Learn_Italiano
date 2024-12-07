@@ -154,3 +154,140 @@ body, html {
     background-color: transparent; /* Changed from semi-transparent white to transparent */
     border-radius: 15px;
 }
+
+/* Italian Vocabulary */
+.vocabulary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.vocabulary-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.vocabulary-card:hover {
+    transform: translateY(-5px);
+}
+
+.vocab-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.vocab-words {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.italian {
+    color: #333;
+    font-size: 1.5em;
+    margin: 5px 0;
+}
+
+.english {
+    color: #666;
+    font-style: italic;
+}
+
+.lesson-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    background-color: #FFD700;
+    border: none;
+    border-radius: 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #f9c400;
+}
+
+/* Learning lessons*/
+
+.section-header {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.section-header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    color: #666;
+    font-size: 1.2em;
+}
+
+.lessons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+}
+
+.lesson-category {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.lesson-category h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.lesson-card {
+    background-color: #FFD700;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.lesson-card h3 {
+    margin-bottom: 10px;
+}
+
+.coming-soon {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.coming-soon:hover {
+    transform: none;
+}

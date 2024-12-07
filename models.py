@@ -15,3 +15,15 @@ class User(db.Model):
         
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+class VocabularyItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    italian_word = db.Column(db.String(100), nullable=False)
+    english_word = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(200), nullable=False)
+    lesson_number = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String(50))
+    
+    def __repr__(self):
+        return f'<Vocabulary {self.italian_word}>'
+    
