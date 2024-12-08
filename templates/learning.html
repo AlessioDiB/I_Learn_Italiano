@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Learning Italian</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <header class="section-header">
+        <h1>Learning Italian</h1>
+        <p class="section-description">Choose a category to start learning</p>
+    </header>
+
+    <div class="lessons-grid">
+        <!-- Vocabulary Section -->
+        <div class="lesson-category">
+            <h2>Vocabulary</h2>
+            <div class="lesson-buttons">
+                <a href="{{ url_for('learning.vocabulary_lesson', lesson_number=1) }}" class="lesson-card">
+                    <h3>Lesson 1</h3>
+                    <p>House Items and Food</p>
+                </a>
+                <a href="{{ url_for('learning.vocabulary_lesson', lesson_number=2) }}" class="lesson-card">
+                    <h3>Lesson 2</h3>
+                    <p>Places and Transportation</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Phrases Section -->
+        <div class="lesson-category">
+            <h2>Phrases</h2>
+            <div class="lesson-buttons">
+                <div class="lesson-card coming-soon">
+                    <h3>Lesson 1</h3>
+                    <p>Coming Soon</p>
+                </div>
+                <div class="lesson-card coming-soon">
+                    <h3>Lesson 2</h3>
+                    <p>Coming Soon</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grammar Section -->
+        <div class="lesson-category">
+            <h2>Basic Grammar</h2>
+            <div class="lesson-buttons">
+                <div class="lesson-card coming-soon">
+                    <h3>Lesson 1</h3>
+                    <p>Coming Soon</p>
+                </div>
+                <div class="lesson-card coming-soon">
+                    <h3>Lesson 2</h3>
+                    <p>Coming Soon</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

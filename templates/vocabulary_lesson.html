@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Vocabulary Lesson {{ lesson_number }}</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <header class="lesson-header">
+        <h1>Vocabulary Lesson {{ lesson_number }}</h1>
+        {% if lesson_number == 1 %}
+        <p class="lesson-description">Basic everyday objects: house items and food</p>
+        {% else %}
+        <p class="lesson-description">Places and transportation</p>
+        {% endif %}
+    </header>
+
+    <div class="vocabulary-grid">
+        {% for item in items %}
+        <div class="vocabulary-card">
+            <img src="{{ item.image_url }}" alt="{{ item.english_word }}" class="vocab-image">
+            <div class="vocab-words">
+                <h3 class="italian">{{ item.italian_word }}</h3>
+                <p class="english">{{ item.english_word }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="lesson-navigation">
+        {% if lesson_number > 1 %}
+        <a href="{{ url_for('vocabulary_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous Lesson</a>
+        {% endif %}
+        {% if lesson_number < 2 %}
+        <a href="{{ url_for('vocabulary_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next Lesson</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

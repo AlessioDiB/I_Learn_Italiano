@@ -1,153 +1,93 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+from models import db, User, VocabularyItem
+import os
+from routes.learning import learning
+from routes.practicing import practicing
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
 
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(200), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+# Register blueprints
+app.register_blueprint(learning)
+app.register_blueprint(practicing)
 
-    def __repr__(self):
-        return '<Task %r>' % self.id
+# User authentication helper
+def get_current_user():
+    if 'user_id' in session:
+        return User.query.get(session['user_id'])
+    return None
 
 
-@app.route('/', methods=['POST', 'GET'])
+# Main routes
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
+    current_user = get_current_user()
+    return render_template('index.html', current_user=current_user)
 
-        try:
-            db.session.add(new_task)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue adding your task'
+# Learning section routes
+@app.route('/learning')
+def learning():
+    return render_template('learning.html')
 
-    else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('index.html', tasks=tasks)
+@app.route('/practising')
+def practising():
+    return render_template('practising.html')
 
+@app.route('/extra-resources')
+def extra_resources():
+    return render_template('extra_resources.html')
 
-@app.route('/delete/<int:id>')
-def delete(id):
-    task_to_delete = Todo.query.get_or_404(id)
+# Information routes
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-    try:
-        db.session.delete(task_to_delete)
-        db.session.commit()
-        return redirect('/')
-    except:
-        return 'There was a problem deleting that task'
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
-@app.route('/update/<int:id>', methods=['GET', 'POST'])
-def update(id):
-    task = Todo.query.get_or_404(id)
-
-    if request.method == 'POST':
-        task.content = request.form['content']
-
-        try:
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue updating your task'
-
-    else:
-        return render_template('update.html', task=task)
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# User routes
+@app.route('/user')
+def user():
+    return render_template('user.html')
 
 '''
-from flask import Flask, render_template, url_for, request, redirect
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+@app.route('/check_image')
+def check_image():
+    import os
+    image_path = os.path.join(os.getcwd(), 'static', 'images', 'homepage_web_draft_1.png')
+    exists = os.path.exists(image_path)
+    return f"""
+    <h1>Image Check</h1>
+    <p>Image path: {image_path}</p>
+    <p>File exists: {exists}</p>
+    <img src="/static/images/homepage_web_draft_1.png" alt="test">
+    """
 
 
-# .\.venv\Scripts\Activate
+@app.route('/learning')
+def learning():
+    return render_template('learning.html')
 
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # sqlite easier to use # 4 / absolute path, 3 / relative path to reside in the project
-db = SQLAlchemy(app) # initialise database with settings from app
-
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True) # id column, integer that references the id of each entry
-    content = db.Column(db.String(200), nullable=False)  # what holds each task
-    # nullable = false. we don't want the user to create a new task and leave the content empty
-    date_created = db.Column(db.DateTime, default = datetime.utcnow)
-
-    # function to return a string every time a new element is created
-    def __repr__(self):
-        return '<Task %r>' % self.id
-
-@app.route('/', methods=['POST', 'GET'])
-def index():
-    if request.method == 'POST':
-        task_content = request.form['content'] # it's going to create a new task from that input
-        new_task = Todo(content=task_content)
-
-        try:
-            db.session.add(new_task) # trying to commit to a database
-            db.session.commit()
-            return redirect('/')  #redirect back to our index
-        except:
-            return 'There was an issue adding your task'
-
-
-    else:
-        task = Todo.query.order_by(Todo.date_created).all() # look at the database content by the order they were created, and return them
-        return render_template('index.html', task = task )    #task, to pass that to our template
-
-@app.route('/delete/<int:id')
-def delete(id):
-    task_to_delete = Todo.query.get_or_404(id)
-
-    try:
-        db.session.delete(task_to_delete)
-        db.session.commit()
-        return redirect('/') # return a redirect back to our homepage
-    except:
-        return 'There was a problem deleting that task'
-
-
-@app.route('/update/<int:id>', methods = ['GET', 'POST'])
-def update(id):
-    task = Todo.query.get_or_404(id)
-
-    if request.method == 'POST':
-        task.content = request.form['content'] # this current task content = the content in the form, in the box
-
-        try:
-            db.session.commit()
-            return redirect('/') # redirect to homepage
-        except:
-            return 'There was an issue updating your task'
-
-    else:
-        return render_template('update.html', task = task)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/learning/vocabulary/<int:lesson_number>')
+def vocabulary_lesson(lesson_number):
+    if lesson_number not in [1, 2]:
+        return redirect(url_for('learning'))
+        
+    vocabulary_items = VocabularyItem.query.filter_by(lesson_number=lesson_number).all()
+    return render_template('vocabulary_lesson.html', 
+                         items=vocabulary_items, 
+                         lesson_number=lesson_number)
 
 '''
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()  # This creates the database tables
+    app.run(debug=True)

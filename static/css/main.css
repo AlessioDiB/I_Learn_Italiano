@@ -1,44 +1,293 @@
+/* main.css */
+
 body, html {
     margin: 0;
     font-family: sans-serif;
-    background-color: lightblue;
-    height: 100%; /* Ensure body and html take up full height */
+    height: 100%;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url('/static/images/homepage_web_draft_1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: lightblue; /* Fallback color if image fails to load */
+}
+
+.navbar {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Add space between buttons */
+    margin-top: 30px;
+}
+
+/* Top-Right Button */
+.top-right-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Green button */
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.top-right-button:hover {
+    transform: scale(1.1);
+    background-color: #3e8e41;
+}
+
+/* Middle Section Buttons (Yellow) */
+.middle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Add space between yellow buttons */
+    margin: 50px 0;
+}
+
+.yellow-button {
+    background-color: #FFD700; /* Yellow buttons */
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.yellow-button:hover {
+    transform: scale(1.1);
+    background-color: #f9c400;
+}
+
+/* Footer Section Buttons (Blue) */
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Add space between blue buttons */
+    margin-bottom: 30px;
+}
+
+.blue-button {
+    background-color: #87CEEB; /* Light blue buttons */
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.blue-button:hover {
+    transform: scale(1.1);
+    background-color: #71b8d6;
+}
+
+
+/* Add these to your existing main.css */
+
+.main-header {
+    text-align: center;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    font-size: 4.5em;  /* Increased from 3em */
+    color: #000000;
+    margin-bottom: 10px;
+}
+.subtitle {
+    font-size: 1.2em;
+    color: #050505;
+}
+
+.user-section {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature-card {
+    background-color: #FFD700; /* Changed from white to yellow */
+    border-radius: 15px;
+    padding: 25px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f9c400; /* Darker yellow on hover */
+}
+
+.feature-card h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.card-link {
+    text-decoration: none;
 }
 
 .content {
+    max-width: 1200px;
     margin: 0 auto;
-    width: 400px;
+    padding: 20px;
+    position: relative;
+    background-color: transparent; /* Changed from semi-transparent white to transparent */
+    border-radius: 15px;
 }
 
-
-table, td, th {
-    border: 1px solid #aaa;
+/* Italian Vocabulary */
+.vocabulary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%; /* Ensure table takes the full width of .content */
-    margin-top: 20px; /* Add spacing between the table and other elements */
+.vocabulary-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
 
-
-th {
-    height: 30px;
+.vocabulary-card:hover {
+    transform: translateY(-5px);
 }
 
-td {
+.vocab-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.vocab-words {
     text-align: center;
-    padding: 5px;
+    margin-top: 10px;
 }
 
-.form {
-    margin-top: 20px;
+.italian {
+    color: #333;
+    font-size: 1.5em;
+    margin: 5px 0;
 }
 
-#content {
-    width: 100%; /* Make the input field fit within the .content div */
-    box-sizing: border-box; /* Ensures padding and borders are included in width */
+.english {
+    color: #666;
+    font-style: italic;
+}
+
+.lesson-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.nav-button {
+    padding: 10px 20px;
+    background-color: #FFD700;
+    border: none;
+    border-radius: 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #f9c400;
+}
+
+/* Learning lessons*/
+
+.section-header {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.section-header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    color: #666;
+    font-size: 1.2em;
+}
+
+.lessons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+}
+
+.lesson-category {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.lesson-category h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.lesson-card {
+    background-color: #FFD700;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.lesson-card h3 {
+    margin-bottom: 10px;
+}
+
+.coming-soon {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.coming-soon:hover {
+    transform: none;
 }
