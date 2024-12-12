@@ -27,3 +27,12 @@ class VocabularyItem(db.Model):
     def __repr__(self):
         return f'<Vocabulary {self.italian_word}>'
     
+
+
+class PhraseItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    italian_phrase = db.Column(db.String(200), nullable=False)
+    english_phrase = db.Column(db.String(200), nullable=False)
+    pronunciation = db.Column(db.String(200))  # Optional pronunciation guide
+    lesson_number = db.Column(db.Integer, nullable=False)  # 1 or 2
+    category = db.Column(db.String(50))  # greetings, common_phrases, etc.

@@ -2,9 +2,9 @@ from flask import Flask, render_template, url_for, request, redirect, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User, VocabularyItem
+from models import db, User, VocabularyItem, PhraseItem
 import os
-from routes.learning import learning
+from routes.learning import learning, init_vocabulary, init_phrases
 from routes.practicing import practicing
 
 app = Flask(__name__)
@@ -90,4 +90,6 @@ def vocabulary_lesson(lesson_number):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # This creates the database tables
+        init_vocabulary()
+        init_phrases()
     app.run(debug=True)
