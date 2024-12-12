@@ -1,3 +1,4 @@
+# vocabulary_lesson.html
 from flask import Blueprint, render_template, redirect, url_for
 from models import VocabularyItem, db
 
@@ -13,8 +14,9 @@ def vocabulary_lesson(lesson_number):
         return redirect(url_for('learning.index'))
         
     vocabulary_items = VocabularyItem.query.filter_by(lesson_number=lesson_number).all()
-    return render_template('vocabulary_lesson.html', 
-                         items=vocabulary_items, 
+    print(f"Found {len(vocabulary_items)} items for lesson {lesson_number}")  # Debug print
+    return render_template('vocabulary_lesson.html',
+                         items=vocabulary_items,
                          lesson_number=lesson_number)
 
 def init_vocabulary():
@@ -98,10 +100,35 @@ def init_vocabulary():
             }
         ]
 
-        # Add all items to database
-        for item in lesson1_items + lesson2_items:
-            vocab_item = VocabularyItem(**item)
-            db.session.add(vocab_item)
-        
-        
-        db.session.commit()
+    try:
+            # Check if we already have vocabulary items
+            if VocabularyItem.query.first() is None:
+                print("Initializing vocabulary items...")
+                # Add all items to database
+                for item in lesson1_items + lesson2_items:
+                    vocab_item = VocabularyItem(**item)
+                    db.session.add(vocab_item)
+                db.session.commit()
+                print("Vocabulary items initialized successfully")
+            else:
+                print("Vocabulary items already exist in database")
+    except Exception as e:
+            print(f"Error initializing vocabulary: {e}")
+            db.session.rollback()
+
+
+
+
+
+
+
+
+            '''
+            # Add all items to database
+            for item in lesson1_items + lesson2_items:
+                vocab_item = VocabularyItem(**item)
+                db.session.add(vocab_item)
+            
+            
+            db.session.commit()
+            '''
