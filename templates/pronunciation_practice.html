@@ -1,0 +1,38 @@
+<!-- pronunciation_practice.html -->
+{% extends 'base.html' %}
+{% block head %}
+<title>Pronunciation Practice {{ lesson_number }}</title>
+{% endblock %}
+{% block body %}
+<div class="content">
+   <header class="lesson-header">
+       <h1>Pronunciation Practice - Lesson {{ lesson_number }}</h1>
+       <p class="lesson-description">
+           {% if lesson_number == 1 %}
+           Basic Italian Sounds
+           {% else %}
+           Complex Italian Sounds
+           {% endif %}
+       </p>
+   </header>
+
+   <div class="practice-grid">
+       {% for exercise in exercises %}
+       <div class="practice-card">
+           <h2 class="word">{{ exercise.word }}</h2>
+           <p class="pronunciation">{{ exercise.pronunciation_guide }}</p>
+           <!-- Future: Add audio player -->
+       </div>
+       {% endfor %}
+   </div>
+
+   <div class="lesson-navigation">
+       {% if lesson_number > 1 %}
+       <a href="{{ url_for('practicing.pronunciation_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
+       {% endif %}
+       {% if lesson_number < 2 %}
+       <a href="{{ url_for('practicing.pronunciation_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
+       {% endif %}
+   </div>
+</div>
+{% endblock %}

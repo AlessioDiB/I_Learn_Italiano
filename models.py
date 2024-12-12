@@ -44,3 +44,21 @@ class GrammarLesson(db.Model):
     content = db.Column(db.Text, nullable=False)
     lesson_number = db.Column(db.Integer, nullable=False)
     category = db.Column(db.String(50))
+
+class PronunciationExercise(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   word = db.Column(db.String(100), nullable=False)
+   pronunciation_guide = db.Column(db.String(200), nullable=False)
+   lesson_number = db.Column(db.Integer, nullable=False)
+
+class WritingExercise(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   prompt = db.Column(db.String(200), nullable=False)
+   example_answer = db.Column(db.Text, nullable=False)
+   lesson_number = db.Column(db.Integer, nullable=False)
+
+class ReadingExercise(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   text = db.Column(db.Text, nullable=False)
+   questions = db.Column(db.JSON, nullable=False)  # Store multiple choice questions
+   lesson_number = db.Column(db.Integer, nullable=False)

@@ -1,0 +1,51 @@
+<!-- reading_practice.html -->
+{% extends 'base.html' %}
+{% block head %}
+<title>Reading Practice {{ lesson_number }}</title>
+{% endblock %}
+{% block body %}
+<div class="content">
+   <header class="lesson-header">
+       <h1>Reading Practice - Lesson {{ lesson_number }}</h1>
+       <p class="lesson-description">
+           {% if lesson_number == 1 %}
+           Practice Reading Simple Text
+           {% else %}
+           Practice Reading Complex Text
+           {% endif %}
+       </p>
+   </header>
+
+   <div class="practice-container">
+       <div class="reading-text">
+           {{ exercise.text | safe }}
+       </div>
+
+       <div class="questions">
+           {% for question in exercise.questions %}
+           <div class="question-card">
+               <h3>Question {{ loop.index }}</h3>
+               <p>{{ question.question }}</p>
+               <div class="options">
+                   {% for option in question.options %}
+                   <label class="option">
+                       <input type="radio" name="q{{ loop.parent.index }}" value="{{ loop.index }}">
+                       {{ option }}
+                   </label>
+                   {% endfor %}
+               </div>
+           </div>
+           {% endfor %}
+       </div>
+   </div>
+
+   <div class="lesson-navigation">
+       {% if lesson_number > 1 %}
+       <a href="{{ url_for('practicing.reading_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
+       {% endif %}
+       {% if lesson_number < 2 %}
+       <a href="{{ url_for('practicing.reading_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
+       {% endif %}
+   </div>
+</div>
+{% endblock %}

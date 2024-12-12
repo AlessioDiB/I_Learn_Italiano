@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User, VocabularyItem, PhraseItem, GrammarLesson
+from models import db, User, VocabularyItem, PhraseItem, GrammarLesson, PronunciationExercise, WritingExercise, ReadingExercise
 import os
 from routes.learning import learning, init_vocabulary, init_phrases, init_grammar
 from routes.practicing import practicing

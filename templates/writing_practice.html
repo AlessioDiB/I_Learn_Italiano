@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Writing Practice {{ lesson_number }}</title>
+{% endblock %}
+{% block body %}
+<div class="content">
+   <header class="lesson-header">
+       <h1>Writing Practice - Lesson {{ lesson_number }}</h1>
+       <p class="lesson-description">
+           {% if lesson_number == 1 %}
+           Practice Writing Simple Responses
+           {% else %}
+           Practice Using Vocabulary in Writing
+           {% endif %}
+       </p>
+   </header>
+
+   <div class="practice-container">
+       <div class="writing-prompt">
+           <h3>Prompt:</h3>
+           <p>{{ exercise.prompt }}</p>
+       </div>
+       
+       <div class="writing-area">
+           <textarea class="response-input" rows="5" placeholder="Write your response here..."></textarea>
+       </div>
+
+       <button class="check-answer">Show Example Answer</button>
+       
+       <div class="example-answer" style="display: none;">
+           <h3>Example Answer:</h3>
+           <p>{{ exercise.example_answer }}</p>
+       </div>
+   </div>
+
+   <div class="lesson-navigation">
+       {% if lesson_number > 1 %}
+       <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
+       {% endif %}
+       {% if lesson_number < 2 %}
+       <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
+       {% endif %}
+   </div>
+</div>
+{% endblock %}
