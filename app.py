@@ -4,7 +4,7 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, VocabularyItem
 import os
-from routes.learning import learning
+from routes.learning import learning, init_vocabulary  # Import both blueprint and function
 from routes.practicing import practicing
 
 app = Flask(__name__)
@@ -22,7 +22,11 @@ def get_current_user():
         return User.query.get(session['user_id'])
     return None
 
+with app.app_context():
+    db.create_all()  # Creates the tables
+    init_vocabulary()  # Initialize vocabulary items
 
+    
 # Main routes
 @app.route('/')
 def index():
