@@ -291,3 +291,43 @@ body, html {
 .coming-soon:hover {
     transform: none;
 }
+
+
+.lesson-header {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;  /* Center align the text */
+    width: 100%;         /* Full width */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Optional: adds subtle shadow */
+}
+
+.lesson-header h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.lesson-description {
+    margin: 0;
+    color: #666;
+}
+
+/* Make sure the content div has proper spacing */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centers content horizontally */
+}
+
+/* Ensure vocabulary grid is properly aligned */
+.vocabulary-grid {
+    width: 100%;         /* Full width */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;     /* Add vertical padding */
+}

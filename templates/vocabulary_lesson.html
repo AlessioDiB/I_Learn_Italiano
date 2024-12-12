@@ -29,10 +29,11 @@
 
     <div class="lesson-navigation">
         {% if lesson_number > 1 %}
-        <a href="{{ url_for('vocabulary_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous Lesson</a>
+            <a href="{{ url_for('learning.vocabulary_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous Lesson</a>
         {% endif %}
+        
         {% if lesson_number < 2 %}
-        <a href="{{ url_for('vocabulary_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next Lesson</a>
+            <a href="{{ url_for('learning.vocabulary_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next Lesson</a>
         {% endif %}
     </div>
 </div>
