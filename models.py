@@ -36,3 +36,11 @@ class PhraseItem(db.Model):
     pronunciation = db.Column(db.String(200))  # Optional pronunciation guide
     lesson_number = db.Column(db.Integer, nullable=False)  # 1 or 2
     category = db.Column(db.String(50))  # greetings, common_phrases, etc.
+
+
+class GrammarLesson(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    lesson_number = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String(50))

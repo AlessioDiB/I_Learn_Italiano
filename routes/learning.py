@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from models import VocabularyItem, PhraseItem, db
+from models import VocabularyItem, PhraseItem, db, GrammarLesson
 
 learning = Blueprint('learning', __name__)
 
@@ -102,6 +102,8 @@ def init_vocabulary():
         for item in lesson1_items + lesson2_items:
             vocab_item = VocabularyItem(**item)
             db.session.add(vocab_item)
+
+        db.session.commit()
         
 
 @learning.route('/learning/phrases/<int:lesson_number>')
@@ -192,5 +194,71 @@ def init_phrases():
             phrase_item = PhraseItem(**item)
             db.session.add(phrase_item)
 
+
+        db.session.commit()
+
+
+
+@learning.route('/learning/grammar/<int:lesson_number>')
+def grammar_lesson(lesson_number):
+    if lesson_number not in [1, 2]:
+        return redirect(url_for('learning.index'))
+    
+    grammar_item = GrammarLesson.query.filter_by(lesson_number=lesson_number).first()
+    return render_template('grammar_lesson.html',
+                         lesson=grammar_item,
+                         lesson_number=lesson_number)
+
+def init_grammar():
+    if GrammarLesson.query.first() is None:
+        lessons = [
+            {
+                'title': 'Italian Genders and Grammar Overview',
+                'content': '''
+                <h3>Italian Genders</h3>
+                <p>In Italian, every noun has a gender - either masculine or feminine. Unlike English, there is no neutral gender.</p>
+                
+                <h4>Masculine Nouns (-o)</h4>
+                <ul>
+                    <li>il libro (the book)</li>
+                    <li>il tavolo (the table)</li>
+                </ul>
+
+                <h4>Feminine Nouns (-a)</h4>
+                <ul>
+                    <li>la casa (the house)</li>
+                    <li>la sedia (the chair)</li>
+                </ul>
+
+                <h3>Basic Grammar Structure</h3>
+                <p>Italian sentence structure is similar to English: Subject + Verb + Object</p>
+                ''',
+                'lesson_number': 1,
+                'category': 'grammar_basics'
+            },
+            {
+                'title': 'Italian Alphabet and Pronunciation',
+                'content': '''
+                <h3>The Italian Alphabet</h3>
+                <p>The Italian alphabet has 21 letters (missing K, W, X, Y, J)</p>
+
+                <h4>Key Differences from English</h4>
+                <ul>
+                    <li>C: "ch" before e/i, "k" before a/o/u</li>
+                    <li>G: "j" before e/i, "g" before a/o/u</li>
+                    <li>H: Always silent</li>
+                    <li>R: Rolled/trilled</li>
+                </ul>
+
+                <h4>Vowels</h4>
+                <p>A (ah), E (eh), I (ee), O (oh), U (oo)</p>
+                ''',
+                'lesson_number': 2,
+                'category': 'pronunciation'
+            }
+        ]
         
+        for lesson in lessons:
+            grammar_item = GrammarLesson(**lesson)
+            db.session.add(grammar_item)
         db.session.commit()
