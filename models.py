@@ -58,7 +58,7 @@ class WritingExercise(db.Model):
    lesson_number = db.Column(db.Integer, nullable=False)
 
 class ReadingExercise(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   text = db.Column(db.Text, nullable=False)
-   questions = db.Column(db.JSON, nullable=False)  # Store multiple choice questions
-   lesson_number = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text, nullable=False)
+    questions = db.Column(db.JSON, nullable=False)  # Store questions and answers as JSON
+    lesson_number = db.Column(db.Integer, nullable=False)

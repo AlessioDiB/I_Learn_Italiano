@@ -22,8 +22,12 @@
        </div>
        
        <div class="writing-area">
-           <textarea class="response-input" rows="5" placeholder="Write your response here..."></textarea>
-       </div>
+        <form method="POST" action="{{ url_for('practicing.save_writing_response') }}">
+            <textarea name="response" class="response-input" required></textarea>
+            <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+            <button type="submit" class="check-answer">Submit Response</button>
+        </form>
+    </div>
 
        <button class="check-answer">Show Example Answer</button>
        

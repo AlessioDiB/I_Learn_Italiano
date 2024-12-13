@@ -1,51 +1,72 @@
-<!-- reading_practice.html -->
 {% extends 'base.html' %}
 {% block head %}
 <title>Reading Practice {{ lesson_number }}</title>
 {% endblock %}
+
 {% block body %}
 <div class="content">
-   <header class="lesson-header">
-       <h1>Reading Practice - Lesson {{ lesson_number }}</h1>
-       <p class="lesson-description">
-           {% if lesson_number == 1 %}
-           Practice Reading Simple Text
-           {% else %}
-           Practice Reading Complex Text
-           {% endif %}
-       </p>
-   </header>
+    <header class="lesson-header">
+        <h1>Reading Practice - Lesson {{ lesson_number }}</h1>
+        <p class="lesson-description">
+            {% if lesson_number == 1 %}
+            Practice Reading Simple Text
+            {% else %}
+            Practice Reading Complex Text
+            {% endif %}
+        </p>
+    </header>
 
-   <div class="practice-container">
-       <div class="reading-text">
-           {{ exercise.text | safe }}
-       </div>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
 
-       <div class="questions">
-           {% for question in exercise.questions %}
-           <div class="question-card">
-               <h3>Question {{ loop.index }}</h3>
-               <p>{{ question.question }}</p>
-               <div class="options">
-                   {% for option in question.options %}
-                   <label class="option">
-                       <input type="radio" name="q{{ loop.parent.index }}" value="{{ loop.index }}">
-                       {{ option }}
-                   </label>
-                   {% endfor %}
-               </div>
-           </div>
-           {% endfor %}
-       </div>
-   </div>
+    <div class="practice-container">
+        <!-- Reading Text Section -->
+        <div class="reading-text">
+            <pre class="text-content">{{ exercise.text }}</pre>
+        </div>
 
-   <div class="lesson-navigation">
-       {% if lesson_number > 1 %}
-       <a href="{{ url_for('practicing.reading_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
-       {% endif %}
-       {% if lesson_number < 2 %}
-       <a href="{{ url_for('practicing.reading_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
-       {% endif %}
-   </div>
+        <!-- Questions Section -->
+        <div class="questions-section">
+            <h2>Comprehension Questions</h2>
+            <form method="POST" action="{{ url_for('practicing.check_answers', lesson_number=lesson_number) }}">
+                {% for i in range(3) %}  <!-- We know we have 3 questions -->
+                <div class="question-card">
+                    <h3>Question {{ i + 1 }}</h3>
+                    <p class="question-text">{{ exercise.questions[i].question }}</p>
+                    <div class="options">
+                        {% for option in exercise.questions[i].options %}
+                        <div class="option">
+                            <input type="radio" 
+                                   name="question{{ i + 1 }}" 
+                                   id="q{{ i + 1 }}_{{ loop.index }}"
+                                   value="{{ loop.index0 }}" 
+                                   required>
+                            <label for="q{{ i + 1 }}_{{ loop.index }}">{{ option }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="submit" class="submit-button">Check Answers</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="lesson-navigation">
+        {% if lesson_number > 1 %}
+        <a href="{{ url_for('practicing.reading_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
+        {% endif %}
+        {% if lesson_number < 2 %}
+        <a href="{{ url_for('practicing.reading_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

@@ -457,24 +457,11 @@ body, html {
     text-align: center;
  }
  
- .practice-container {
-    background: white;
-    border-radius: 10px;
-    padding: 30px;
-    margin: 20px 0;
- }
  
  .writing-prompt, .reading-text {
     margin-bottom: 20px;
  }
  
- .response-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: vertical;
- }
  
  .check-answer {
     background: #4CAF50;
@@ -506,3 +493,138 @@ body, html {
     gap: 10px;
     cursor: pointer;
  }
+
+
+/* reading practising part */
+
+
+ .lesson-header {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.practice-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px auto;
+    text-align: center;
+    width: 90%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.writing-prompt, .example-answer {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.writing-area {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.response-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+
+
+
+
+.practice-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.reading-text {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.text-content {
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.questions-section {
+    margin-top: 30px;
+}
+
+.questions-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.question-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.question-text {
+    font-size: 1.1em;
+    color: #333;
+    margin: 10px 0;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option label {
+    cursor: pointer;
+}
+
+.submit-button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.submit-button:hover {
+    background: #45a049;
+}
+
+
+/* reading practising check answer */
+.alert {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+}
