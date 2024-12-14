@@ -675,3 +675,37 @@ body, html {
 .play-button:hover {
     background: #45a049;
 }
+
+
+
+/* writing practising */
+
+.writing-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.writing-prompt {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.answer-input {
+    width: 60%;  /* Reduced from 100% */
+    padding: 10px;
+    margin: 10px auto;  /* Added auto margins */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;  /* Makes it a block element */
+}
+
+.feedback {
+    margin-top: 10px;
+    font-weight: bold;
+}

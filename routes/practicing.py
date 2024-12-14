@@ -11,13 +11,15 @@ def index():
     return render_template('practicing.html')
 
 
-
+'''
 @practicing.route('/practicing/writing/<int:lesson_number>')
 def writing_lesson(lesson_number):
     exercise = WritingExercise.query.filter_by(lesson_number=lesson_number).first()
     return render_template('writing_practice.html',
                          exercise=exercise,
                          lesson_number=lesson_number)
+
+'''
 
 @practicing.route('/save_writing_response', methods=['POST'])
 def save_writing_response():
@@ -134,3 +136,31 @@ def generate_audio(word):
     os.makedirs('static/audio', exist_ok=True)
     tts.save(audio_path)
     return jsonify({'audio_url': '/' + audio_path})
+
+
+
+@practicing.route('/practicing/writing/<int:lesson_number>')
+def writing_lesson(lesson_number):
+    if lesson_number == 1:
+        exercise = {
+            'title': 'Basic Vocabulary Practice',
+            'prompts': [
+                {'question': 'How do you say "the table" in Italian?', 'expected': 'la tavola'},
+                {'question': 'Write "the house" in Italian:', 'expected': 'la casa'},
+                {'question': 'Translate "the chair" to Italian:', 'expected': 'la sedia'},
+                {'question': 'Write "the pizza" in Italian:', 'expected': 'la pizza'},
+                {'question': 'How do you say "the pasta" in Italian?', 'expected': 'la pasta'}
+            ]
+        }
+    else:
+        exercise = {
+            'title': 'Common Phrases Practice',
+            'prompts': [
+                {'question': 'How do you say "Hello!" in Italian?', 'expected': 'Ciao!'},
+                {'question': 'Write "Good morning!" in Italian:', 'expected': 'Buongiorno!'},
+                {'question': 'Translate "How are you?" to Italian:', 'expected': 'Come stai?'},
+                {'question': 'Write "Please" in Italian:', 'expected': 'Per favore'},
+                {'question': 'How do you say "Thank you" in Italian?', 'expected': 'Grazie'}
+            ]
+        }
+    return render_template('writing_practice.html', exercise=exercise, lesson_number=lesson_number)

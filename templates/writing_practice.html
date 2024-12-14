@@ -1,49 +1,51 @@
+<!-- writing_practice.html -->
 {% extends 'base.html' %}
 {% block head %}
 <title>Writing Practice {{ lesson_number }}</title>
 {% endblock %}
+
 {% block body %}
 <div class="content">
-   <header class="lesson-header">
-       <h1>Writing Practice - Lesson {{ lesson_number }}</h1>
-       <p class="lesson-description">
-           {% if lesson_number == 1 %}
-           Practice Writing Simple Responses
-           {% else %}
-           Practice Using Vocabulary in Writing
-           {% endif %}
-       </p>
-   </header>
+    <header class="lesson-header">
+        <h1>Writing Practice - Lesson {{ lesson_number }}</h1>
+        <p class="lesson-description">{{ exercise.title }}</p>
+    </header>
 
-   <div class="practice-container">
-       <div class="writing-prompt">
-           <h3>Prompt:</h3>
-           <p>{{ exercise.prompt }}</p>
-       </div>
-       
-       <div class="writing-area">
-        <form method="POST" action="{{ url_for('practicing.save_writing_response') }}">
-            <textarea name="response" class="response-input" required></textarea>
-            <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
-            <button type="submit" class="check-answer">Submit Response</button>
-        </form>
+    <div class="writing-section">
+        {% for prompt in exercise.prompts %}
+        <div class="writing-prompt">
+            <h3>{{ prompt.question }}</h3>
+            <input type="text" class="answer-input" placeholder="Type your answer here">
+            <button onclick="checkAnswer(this, '{{ prompt.expected }}')">Check</button>
+            <p class="feedback"></p>
+        </div>
+        {% endfor %}
     </div>
 
-       <button class="check-answer">Show Example Answer</button>
-       
-       <div class="example-answer" style="display: none;">
-           <h3>Example Answer:</h3>
-           <p>{{ exercise.example_answer }}</p>
-       </div>
-   </div>
-
-   <div class="lesson-navigation">
-       {% if lesson_number > 1 %}
-       <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
-       {% endif %}
-       {% if lesson_number < 2 %}
-       <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
-       {% endif %}
-   </div>
+    <div class="lesson-navigation">
+        {% if lesson_number > 1 %}
+        <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
+        {% endif %}
+        {% if lesson_number < 2 %}
+        <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
+        {% endif %}
+    </div>
 </div>
+
+<script>
+function checkAnswer(button, expected) {
+    const input = button.previousElementSibling;
+    const feedback = button.nextElementSibling;
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = expected.toLowerCase();
+
+    if (userAnswer === correctAnswer) {
+        feedback.textContent = "Correct!";
+        feedback.style.color = "green";
+    } else {
+        feedback.textContent = `Incorrect. The answer is: ${expected}`;
+        feedback.style.color = "red";
+    }
+}
+</script>
 {% endblock %}

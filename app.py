@@ -1,3 +1,4 @@
+#app.py
 from flask import Flask, render_template, url_for, request, redirect, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -56,37 +57,6 @@ def contact():
 @app.route('/user')
 def user():
     return render_template('user.html')
-
-'''
-@app.route('/check_image')
-def check_image():
-    import os
-    image_path = os.path.join(os.getcwd(), 'static', 'images', 'homepage_web_draft_1.png')
-    exists = os.path.exists(image_path)
-    return f"""
-    <h1>Image Check</h1>
-    <p>Image path: {image_path}</p>
-    <p>File exists: {exists}</p>
-    <img src="/static/images/homepage_web_draft_1.png" alt="test">
-    """
-
-
-@app.route('/learning')
-def learning():
-    return render_template('learning.html')
-
-
-@app.route('/learning/vocabulary/<int:lesson_number>')
-def vocabulary_lesson(lesson_number):
-    if lesson_number not in [1, 2]:
-        return redirect(url_for('learning'))
-        
-    vocabulary_items = VocabularyItem.query.filter_by(lesson_number=lesson_number).all()
-    return render_template('vocabulary_lesson.html', 
-                         items=vocabulary_items, 
-                         lesson_number=lesson_number)
-
-'''
 
 if __name__ == '__main__':
     with app.app_context():

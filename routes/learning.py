@@ -105,6 +105,7 @@ def init_vocabulary():
 
         db.session.commit()
         
+        
 
 @learning.route('/learning/phrases/<int:lesson_number>')
 def phrases_lesson(lesson_number):
@@ -216,7 +217,7 @@ def init_grammar():
                 'title': 'Italian Genders and Grammar Overview',
                 'content': '''
                 <h3>Italian Genders</h3>
-                <p>In Italian, every noun has a gender - either masculine or feminine. Unlike English, there is no neutral gender.</p>
+                <p>In Italian, every noun has a gender - either masculine or feminine. Unlike English, there is no neutral gender. Also pay attention to the articles used. In this case, "il" is masculine singular and "la" is feminine singular.</p>
                 
                 <h4>Masculine Nouns (-o)</h4>
                 <ul>
