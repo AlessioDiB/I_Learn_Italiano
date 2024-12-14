@@ -117,7 +117,7 @@ def pronunciation_lesson(lesson_number):
             'words': [
                 {'italian': 'biblioteca', 'english': 'library', 'phonetic': 'bee-blee-oh-teh-kah'},
                 {'italian': 'stazione', 'english': 'station', 'phonetic': 'stah-tzee-oh-neh'},
-                {'italian': "l'autobus", 'english': 'bus', 'phonetic': 'lau-toh-boos'},
+                {'italian': 'autobus', 'english': 'bus', 'phonetic': 'au-toh-boos'},
                 {'italian': 'quando', 'english': 'when', 'phonetic': 'kwan-doh'},
                 {'italian': 'anche', 'english': 'also', 'phonetic': 'ahn-keh'}
             ]
