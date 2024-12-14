@@ -1,0 +1,28 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+{% block body %}
+<div class="content">
+   <div class="auth-container">
+       <header class="auth-header">
+           <div class="header-box">
+               <h1>Login</h1>
+           </div>
+       </header>
+       {% with messages = get_flashed_messages() %}
+           {% if messages %}
+               {% for message in messages %}
+                   <div class="alert">{{ message }}</div>
+               {% endfor %}
+           {% endif %}
+       {% endwith %}
+       <form method="POST" class="auth-form">
+           <input type="text" name="username" placeholder="Username" required> <!-- everything inside white rectanngle, like floating clouds. hover going up + changing colour -->
+           <input type="password" name="password" placeholder="Password" required>
+           <button type="submit">Login</button>
+       </form>
+       <div class="signup-box">
+           <p>New user? <a href="{{ url_for('signup') }}">Sign up</a></p>
+       </div>
+   </div>
+</div>
+{% endblock %}
