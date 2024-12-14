@@ -3,25 +3,21 @@
 {% block head %}
 <title>Pronunciation Practice {{ lesson_number }}</title>
 {% endblock %}
+
 {% block body %}
 <div class="content">
    <header class="lesson-header">
        <h1>Pronunciation Practice - Lesson {{ lesson_number }}</h1>
-       <p class="lesson-description">
-           {% if lesson_number == 1 %}
-           Basic Italian Sounds
-           {% else %}
-           Complex Italian Sounds
-           {% endif %}
-       </p>
+       <p class="lesson-description">{{ exercises.title }}</p>
    </header>
 
-   <div class="practice-grid">
-       {% for exercise in exercises %}
-       <div class="practice-card">
-           <h2 class="word">{{ exercise.word }}</h2>
-           <p class="pronunciation">{{ exercise.pronunciation_guide }}</p>
-           <!-- Future: Add audio player -->
+   <div class="pronunciation-grid">
+       {% for word in exercises.words %}
+       <div class="pronunciation-card">
+           <h2 class="italian">{{ word.italian }}</h2>
+           <p class="english">{{ word.english }}</p>
+           <p class="phonetic">({{ word.phonetic }})</p>
+           <button class="play-button" onclick="playPronunciation('{{ word.italian }}')">Listen</button>
        </div>
        {% endfor %}
    </div>
@@ -35,4 +31,20 @@
        {% endif %}
    </div>
 </div>
+
+
+
+<script>
+    function playPronunciation(word) {
+        fetch(`/practicing/generate_audio/${encodeURIComponent(word)}`)
+            .then(response => response.json())
+            .then(data => {
+                const audio = new Audio(data.audio_url);
+                audio.play();
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    </script>
+
+
 {% endblock %}

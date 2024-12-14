@@ -1,6 +1,8 @@
 # practicing.py
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash,jsonify
 from models import PronunciationExercise, WritingExercise, ReadingExercise, db
+from gtts import gTTS
+import os
 
 practicing = Blueprint('practicing', __name__)
 
@@ -8,12 +10,7 @@ practicing = Blueprint('practicing', __name__)
 def index():
     return render_template('practicing.html')
 
-@practicing.route('/practicing/pronunciation/<int:lesson_number>')
-def pronunciation_lesson(lesson_number):
-    exercises = PronunciationExercise.query.filter_by(lesson_number=lesson_number).all()
-    return render_template('pronunciation_practice.html',
-                         exercises=exercises,
-                         lesson_number=lesson_number)
+
 
 @practicing.route('/practicing/writing/<int:lesson_number>')
 def writing_lesson(lesson_number):
@@ -98,3 +95,42 @@ def check_answers(lesson_number):
     
     flash(f'You scored {score} out of 3!')
     return redirect(url_for('practicing.reading_lesson', lesson_number=lesson_number))
+
+
+
+@practicing.route('/practicing/pronunciation/<int:lesson_number>')
+def pronunciation_lesson(lesson_number):
+    if lesson_number == 1:
+        exercises = {
+            'title': 'Basic Sounds',
+            'words': [
+                {'italian': 'casa', 'english': 'house', 'phonetic': 'kah-sah'},
+                {'italian': 'tavola', 'english': 'table', 'phonetic': 'tah-voh-lah'},
+                {'italian': 'sedia', 'english': 'chair', 'phonetic': 'seh-dee-ah'},
+                {'italian': 'pizza', 'english': 'pizza', 'phonetic': 'peet-sah'},
+                {'italian': 'pasta', 'english': 'pasta', 'phonetic': 'pah-stah'}
+            ]
+        }
+    else:
+        exercises = {
+            'title': 'Complex Sounds',
+            'words': [
+                {'italian': 'biblioteca', 'english': 'library', 'phonetic': 'bee-blee-oh-teh-kah'},
+                {'italian': 'stazione', 'english': 'station', 'phonetic': 'stah-tzee-oh-neh'},
+                {'italian': "l'autobus", 'english': 'bus', 'phonetic': 'lau-toh-boos'},
+                {'italian': 'quando', 'english': 'when', 'phonetic': 'kwan-doh'},
+                {'italian': 'anche', 'english': 'also', 'phonetic': 'ahn-keh'}
+            ]
+        }
+    
+    return render_template('pronunciation_practice.html',
+                         exercises=exercises,
+                         lesson_number=lesson_number)
+
+@practicing.route('/practicing/generate_audio/<word>')
+def generate_audio(word):
+    tts = gTTS(text=word, lang='it')
+    audio_path = f"static/audio/{word}.mp3"
+    os.makedirs('static/audio', exist_ok=True)
+    tts.save(audio_path)
+    return jsonify({'audio_url': '/' + audio_path})
