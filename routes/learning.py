@@ -124,9 +124,12 @@ def init_vocabulary():
 
 @learning.route('/learning/phrases/<int:lesson_number>')
 def phrases_lesson(lesson_number):
+    current_user = get_current_user()
+    if current_user:
+        mark_lesson_complete(current_user.id, 'phrases', lesson_number)
+    
     if lesson_number not in [1, 2]:
         return redirect(url_for('learning.index'))
-    current_user = get_current_user()
     
     phrase_items = PhraseItem.query.filter_by(lesson_number=lesson_number).all()
     return render_template('phrases_lesson.html',
@@ -219,10 +222,12 @@ def init_phrases():
 
 @learning.route('/learning/grammar/<int:lesson_number>')
 def grammar_lesson(lesson_number):
+    current_user = get_current_user()
+    if current_user:
+        mark_lesson_complete(current_user.id, 'grammar', lesson_number)
     if lesson_number not in [1, 2]:
         return redirect(url_for('learning.index'))
     
-    current_user = get_current_user() 
     grammar_item = GrammarLesson.query.filter_by(lesson_number=lesson_number).first()
     return render_template('grammar_lesson.html',
                          lesson=grammar_item,

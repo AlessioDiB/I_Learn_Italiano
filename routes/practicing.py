@@ -61,6 +61,8 @@ def save_writing_response():
 @practicing.route('/practicing/reading/<int:lesson_number>')
 def reading_lesson(lesson_number):
     current_user = get_current_user()
+    if current_user:
+        mark_lesson_complete(current_user.id, 'reading_practice', lesson_number)
     
     # Example questions for Lesson 1
     if lesson_number == 1:
