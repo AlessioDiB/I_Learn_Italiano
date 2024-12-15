@@ -1,17 +1,32 @@
 from flask import Blueprint, render_template, redirect, url_for
-from models import VocabularyItem, PhraseItem, db, GrammarLesson
+from models import VocabularyItem, PhraseItem, db, GrammarLesson, UserProgress
+from utils import get_current_user
+from datetime import datetime
 
 learning = Blueprint('learning', __name__)
 
+
 @learning.route('/learning')
 def index():
-    return render_template('learning.html')
+    current_user = get_current_user()
+    return render_template('learning.html', current_user=current_user)
 
 @learning.route('/learning/vocabulary/<int:lesson_number>')
 def vocabulary_lesson(lesson_number):
     if lesson_number not in [1, 2]:
         return redirect(url_for('learning.index'))
+    
+    user = get_current_user()  # Use get_current_user instead of current_user
+    if user:  # Check if user is logged in
+        progress = UserProgress.query.filter_by(
+            user_id=user.id,
+            content_type='vocabulary',
+            lesson_number=lesson_number
+        ).first()
         
+        if not progress:
+            mark_lesson_complete(user.id, 'vocabulary', lesson_number)
+    
     vocabulary_items = VocabularyItem.query.filter_by(lesson_number=lesson_number).all()
     return render_template('vocabulary_lesson.html', 
                          items=vocabulary_items, 
@@ -104,18 +119,20 @@ def init_vocabulary():
             db.session.add(vocab_item)
 
         db.session.commit()
-        
+
         
 
 @learning.route('/learning/phrases/<int:lesson_number>')
 def phrases_lesson(lesson_number):
     if lesson_number not in [1, 2]:
         return redirect(url_for('learning.index'))
+    current_user = get_current_user()
     
     phrase_items = PhraseItem.query.filter_by(lesson_number=lesson_number).all()
     return render_template('phrases_lesson.html',
                          items=phrase_items,
-                         lesson_number=lesson_number)
+                         lesson_number=lesson_number,
+                         current_user=current_user)
 
 def init_phrases():
     if PhraseItem.query.first() is None:
@@ -205,10 +222,12 @@ def grammar_lesson(lesson_number):
     if lesson_number not in [1, 2]:
         return redirect(url_for('learning.index'))
     
+    current_user = get_current_user() 
     grammar_item = GrammarLesson.query.filter_by(lesson_number=lesson_number).first()
     return render_template('grammar_lesson.html',
                          lesson=grammar_item,
-                         lesson_number=lesson_number)
+                         lesson_number=lesson_number,
+                         current_user=current_user)
 
 def init_grammar():
     if GrammarLesson.query.first() is None:
@@ -263,3 +282,26 @@ def init_grammar():
             grammar_item = GrammarLesson(**lesson)
             db.session.add(grammar_item)
         db.session.commit()
+
+def mark_lesson_complete(user_id, content_type, lesson_number):
+    progress = UserProgress.query.filter_by(
+        user_id=user_id,
+        content_type=content_type,
+        lesson_number=lesson_number
+    ).first()
+    
+    if not progress:
+        progress = UserProgress(
+            user_id=user_id,
+            content_type=content_type,
+            lesson_number=lesson_number,
+            completed=True
+        )
+        db.session.add(progress)
+    else:
+        progress.completed = True
+        progress.completion_date = datetime.utcnow()
+    
+    db.session.commit()
+
+

@@ -1,14 +1,17 @@
 # practicing.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash,jsonify
-from models import PronunciationExercise, WritingExercise, ReadingExercise, db
+from models import PronunciationExercise, WritingExercise, ReadingExercise, db, UserProgress
 from gtts import gTTS
+from utils import get_current_user
+from datetime import datetime
 import os
 
 practicing = Blueprint('practicing', __name__)
 
 @practicing.route('/practicing')
 def index():
-    return render_template('practicing.html')
+    current_user = get_current_user()
+    return render_template('practicing.html', current_user=current_user)
 
 
 '''
@@ -20,6 +23,28 @@ def writing_lesson(lesson_number):
                          lesson_number=lesson_number)
 
 '''
+
+# In practicing.py
+def mark_lesson_complete(user_id, content_type, lesson_number):
+    progress = UserProgress.query.filter_by(
+        user_id=user_id,
+        content_type=content_type,
+        lesson_number=lesson_number
+    ).first()
+    
+    if not progress:
+        progress = UserProgress(
+            user_id=user_id,
+            content_type=content_type,
+            lesson_number=lesson_number,
+            completed=True
+        )
+        db.session.add(progress)
+    else:
+        progress.completed = True
+        progress.completion_date = datetime.utcnow()
+    
+    db.session.commit()
 
 @practicing.route('/save_writing_response', methods=['POST'])
 def save_writing_response():
@@ -35,6 +60,8 @@ def save_writing_response():
 
 @practicing.route('/practicing/reading/<int:lesson_number>')
 def reading_lesson(lesson_number):
+    current_user = get_current_user()
+    
     # Example questions for Lesson 1
     if lesson_number == 1:
         exercise = {
@@ -79,7 +106,10 @@ def reading_lesson(lesson_number):
                 }
             ]
         }
-    return render_template('reading_practice.html', exercise=exercise, lesson_number=lesson_number)
+    return render_template('reading_practice.html', 
+                         exercise=exercise, 
+                         lesson_number=lesson_number,
+                         current_user=current_user)
 
 @practicing.route('/practicing/check_answers/<int:lesson_number>', methods=['POST'])
 def check_answers(lesson_number):
@@ -102,6 +132,20 @@ def check_answers(lesson_number):
 
 @practicing.route('/practicing/pronunciation/<int:lesson_number>')
 def pronunciation_lesson(lesson_number):
+    current_user = get_current_user()
+    if current_user:
+        progress = UserProgress.query.filter_by(
+            user_id=current_user.id,
+            content_type='pronunciation_practice',
+            lesson_number=lesson_number
+        ).first()
+        
+        if not progress:
+            mark_lesson_complete(current_user.id, 'pronunciation_practice', lesson_number)
+    
+    
+    
+    
     if lesson_number == 1:
         exercises = {
             'title': 'Basic Sounds',
@@ -125,9 +169,13 @@ def pronunciation_lesson(lesson_number):
             ]
         }
     
+    #exercises = PronunciationExercise.query.filter_by(lesson_number=lesson_number).all()
     return render_template('pronunciation_practice.html',
                          exercises=exercises,
-                         lesson_number=lesson_number)
+                         lesson_number=lesson_number,
+                         current_user=current_user)
+
+
 
 @practicing.route('/practicing/generate_audio/<word>')
 def generate_audio(word):
@@ -141,6 +189,23 @@ def generate_audio(word):
 
 @practicing.route('/practicing/writing/<int:lesson_number>')
 def writing_lesson(lesson_number):
+    current_user = get_current_user()
+    if current_user:
+        progress = UserProgress.query.filter_by(
+            user_id=current_user.id,
+            content_type='writing_practice',
+            lesson_number=lesson_number
+        ).first()
+        
+        if not progress:
+            mark_lesson_complete(current_user.id, 'writing_practice', lesson_number)
+    
+
+
+
+    
+    
+    
     if lesson_number == 1:
         exercise = {
             'title': 'Basic Vocabulary Practice',
@@ -163,4 +228,10 @@ def writing_lesson(lesson_number):
                 {'question': 'How do you say "Thank you" in Italian?', 'expected': 'Grazie'}
             ]
         }
-    return render_template('writing_practice.html', exercise=exercise, lesson_number=lesson_number)
+
+
+    #exercise = WritingExercise.query.filter_by(lesson_number=lesson_number).first()
+    return render_template('writing_practice.html',
+                         exercise=exercise,
+                         lesson_number=lesson_number,
+                         current_user=current_user)

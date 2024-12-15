@@ -9,6 +9,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
+    progress = db.relationship('UserProgress', backref='user', lazy=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -62,3 +63,11 @@ class ReadingExercise(db.Model):
     text = db.Column(db.Text, nullable=False)
     questions = db.Column(db.JSON, nullable=False)  # Store questions and answers as JSON
     lesson_number = db.Column(db.Integer, nullable=False)
+
+class UserProgress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    content_type = db.Column(db.String(50))  # 'vocabulary', 'phrases', 'grammar'
+    lesson_number = db.Column(db.Integer)
+    completed = db.Column(db.Boolean, default=False)
+    completion_date = db.Column(db.DateTime, default=datetime.utcnow)
