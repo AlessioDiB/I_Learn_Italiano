@@ -847,3 +847,83 @@ body, html {
     position: relative;
     min-height: 100vh;
 }
+
+
+/* Translation box */
+
+.translation-box {
+    position: fixed;
+    right: 30px;
+    top: 40%;
+    transform: translateY(-40%);
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 280px;
+    padding: 15px;
+}
+
+
+.translation-form > * {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.translation-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.translation-content {
+    padding: 15px;
+}
+
+.translate-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.translate-input {
+    width: calc(100% - 2px); /* Adjust width for padding */
+    box-sizing: border-box; /* Includes padding in width */
+    padding: 8px;
+    margin: 0 auto; /* Centers horizontally */
+    margin-bottom: 10px;
+    display: block; /* Ensures proper block alignment */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+.translate-button {
+    width: 100%;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.translate-button:hover {
+    background-color: #45a049;
+}
+
+.translation-result {
+    margin-top: 10px;
+    padding: 8px;
+    min-height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    word-wrap: break-word;
+    display: block; /* Ensures proper block alignment */
+    width: calc(100% - 2px); /* Adjust width for padding */
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box; /* Includes padding in width */
+}

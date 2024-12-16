@@ -8,6 +8,7 @@ import os
 from routes.learning import learning, init_vocabulary, init_phrases, init_grammar
 from routes.practicing import practicing
 from utils import get_current_user
+from translate import Translator
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -63,6 +64,16 @@ def contact():
     current_user = get_current_user()
     return render_template('contact.html', current_user=current_user)
 
+@app.route('/practicing', methods=['GET', 'POST'])
+def practicing():
+    translation = None
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
+    return render_template('practicing.html', translation=translation)
 
 # User routes
 @app.route('/user')

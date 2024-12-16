@@ -5,13 +5,25 @@ from gtts import gTTS
 from utils import get_current_user
 from datetime import datetime
 import os
+from translate import Translator
+
 
 practicing = Blueprint('practicing', __name__)
 
-@practicing.route('/practicing')
+@practicing.route('/practicing', methods=['GET', 'POST'])
 def index():
     current_user = get_current_user()
-    return render_template('practicing.html', current_user=current_user)
+    translation = None
+    if request.method == 'POST':
+       text = request.form.get('text')
+       direction = request.form.get('direction')
+       from_lang, to_lang = direction.split('-')
+       translator = Translator(from_lang=from_lang, to_lang=to_lang)
+       translation = translator.translate(text)
+    return render_template('practicing.html', current_user=get_current_user(), translation=translation)
+
+    #return render_template('practicing.html', current_user=current_user)
+    
 
 
 '''
@@ -58,7 +70,7 @@ def save_writing_response():
     return redirect(url_for('practicing.writing_lesson', lesson_number=1))
 
 
-@practicing.route('/practicing/reading/<int:lesson_number>')
+@practicing.route('/practicing/reading/<int:lesson_number>', methods=['GET', 'POST'])
 def reading_lesson(lesson_number):
     current_user = get_current_user()
     if current_user:
@@ -132,7 +144,7 @@ def check_answers(lesson_number):
 
 
 
-@practicing.route('/practicing/pronunciation/<int:lesson_number>')
+@practicing.route('/practicing/pronunciation/<int:lesson_number>', methods=['GET', 'POST'])
 def pronunciation_lesson(lesson_number):
     current_user = get_current_user()
     if current_user:
@@ -189,7 +201,7 @@ def generate_audio(word):
 
 
 
-@practicing.route('/practicing/writing/<int:lesson_number>')
+@practicing.route('/practicing/writing/<int:lesson_number>', methods=['GET', 'POST'])
 def writing_lesson(lesson_number):
     current_user = get_current_user()
     if current_user:

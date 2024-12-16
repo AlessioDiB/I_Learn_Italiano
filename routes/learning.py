@@ -1,17 +1,35 @@
-from flask import Blueprint, render_template, redirect, url_for
+# learning.py
+from flask import Blueprint, render_template, redirect, url_for, request
 from models import VocabularyItem, PhraseItem, db, GrammarLesson, UserProgress
 from utils import get_current_user
 from datetime import datetime
+from translate import Translator
+
 
 learning = Blueprint('learning', __name__)
 
 
-@learning.route('/learning')
+@learning.route('/learning', methods=['GET', 'POST'])
 def index():
     current_user = get_current_user()
-    return render_template('learning.html', current_user=current_user)
+    translation = None
+    if request.method == 'POST':
+       text = request.form.get('text')
+       direction = request.form.get('direction')
+       from_lang, to_lang = direction.split('-')
+       translator = Translator(from_lang=from_lang, to_lang=to_lang)
+       translation = translator.translate(text)
+    return render_template('learning.html', current_user=get_current_user(), translation=translation)
+    
+    
+    
+    
+    #return render_template('learning.html', current_user=current_user)
 
-@learning.route('/learning/vocabulary/<int:lesson_number>')
+
+
+
+@learning.route('/learning/vocabulary/<int:lesson_number>', methods=['GET', 'POST'])
 def vocabulary_lesson(lesson_number):
     if lesson_number not in [1, 2]:
         return redirect(url_for('learning.index'))
@@ -26,11 +44,23 @@ def vocabulary_lesson(lesson_number):
         
         if not progress:
             mark_lesson_complete(user.id, 'vocabulary', lesson_number)
+
+    translation = None
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
     
     vocabulary_items = VocabularyItem.query.filter_by(lesson_number=lesson_number).all()
-    return render_template('vocabulary_lesson.html', 
-                         items=vocabulary_items, 
-                         lesson_number=lesson_number)
+    return render_template('vocabulary_lesson.html',
+                         items=vocabulary_items,
+                         lesson_number=lesson_number,
+                         translation=translation,
+                         current_user=get_current_user())
+    
+    
 
 def init_vocabulary():
     # Check if we already have vocabulary items
@@ -122,7 +152,7 @@ def init_vocabulary():
 
         
 
-@learning.route('/learning/phrases/<int:lesson_number>')
+@learning.route('/learning/phrases/<int:lesson_number>', methods=['GET', 'POST'])
 def phrases_lesson(lesson_number):
     current_user = get_current_user()
     if current_user:
@@ -220,7 +250,7 @@ def init_phrases():
 
 
 
-@learning.route('/learning/grammar/<int:lesson_number>')
+@learning.route('/learning/grammar/<int:lesson_number>', methods=['GET', 'POST'])
 def grammar_lesson(lesson_number):
     current_user = get_current_user()
     if current_user:

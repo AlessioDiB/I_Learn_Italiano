@@ -44,7 +44,22 @@
             })
             .catch(error => console.error('Error:', error));
     }
-    </script>
-
+</script>
+<div class="translation-box">
+    <div class="translation-header">
+        <h3>Translation Helper</h3>
+    </div>
+    <form method="POST" class="translation-form">
+        <select name="direction" class="translate-select">
+            <option value="it-en">Italian → English</option>
+            <option value="en-it">English → Italian</option>
+        </select>
+        <input type="text" name="text" class="translate-input" placeholder="Enter text...">
+        <button type="submit" class="translate-button">Translate</button>
+        {% if translation %}
+            <div class="translation-result">{{ translation }}</div>
+        {% endif %}
+</form>
+</div>
 
 {% endblock %}
