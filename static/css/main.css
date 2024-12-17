@@ -927,3 +927,77 @@ body, html {
     max-width: 100%; /* Prevent overflow */
     box-sizing: border-box; /* Includes padding in width */
 }
+
+
+
+/* Extra Resources section */
+
+.resource-section {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+/* Make sure grid stays inside */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Reduced minimum width */
+    gap: 15px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.resource-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.resource-card h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.resource-card p {
+    color: #666;
+    margin: 0;
+}
+
+.content-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px auto;
+    width: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Keep header always visible */
+.content-box h1,
+.content-box .section-description {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 10px 0;
+    margin: 0;
+    z-index: 1;
+}
+
+/* Container for scrollable content */
+.resources-container {
+    overflow-y: auto;
+    max-height: calc(80vh - 100px);  /* Adjust based on header height */
+    padding: 20px 0;
+}

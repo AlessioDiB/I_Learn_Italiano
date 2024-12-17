@@ -1,12 +1,59 @@
+<!-- extra_resources.html -->
 {% extends 'base.html' %}
-
-{% block head %}
-<title>Extra Resources</title>
-{% endblock %}
-
 {% block body %}
 <div class="content">
-    <h1>Extra Resources</h1>
-    <p>Here you can find additional materials for learning Italian.</p>
+    <div class="content-box">
+        <h1>Extra Resources</h1>
+        <p class="section-description">Additional materials to enhance your Italian learning</p>
+        
+        <div class="resources-container">
+            <!-- Websites Section -->
+            <div class="resource-section">
+                <h2>Useful Websites</h2>
+                <div class="resource-grid">
+                    <a href="https://www.duolingo.com/course/it/en/Learn-Italian" target="_blank" class="resource-card">
+                        <h3>Duolingo</h3>
+                        <p>Free language learning platform with gamified lessons</p>
+                    </a>
+                    <a href="https://www.babbel.com/learn-italian" target="_blank" class="resource-card">
+                        <h3>Babbel</h3>
+                        <p>Comprehensive Italian courses with focus on conversation</p>
+                    </a>
+                </div>
+            </div>
+        
+
+            <!-- YouTube Channels -->
+            <div class="resource-section">
+                <h2>YouTube Channels</h2>
+                <div class="resource-grid">
+                    <a href="https://www.youtube.com/@ItalianPod101" target="_blank" class="resource-card">
+                        <h3>ItalianPod101</h3>
+                        <p>Video lessons covering grammar, vocabulary, and culture</p>
+                    </a>
+                    <a href="https://www.youtube.com/@lucreziaoddone" target="_blank" class="resource-card">
+                        <h3>Learn Italian with Lucrezia</h3>
+                        <p>Native speaker teaching Italian language and culture</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Apps -->
+            <div class="resource-section">
+                <h2>Mobile Applications</h2>
+                <div class="resource-grid">
+                    <a href="https://apps.apple.com/us/app/busuu-language-learning-app/id379968583" target="_blank" class="resource-card">
+                        <h3>Busuu</h3>
+                        <p>Learn Italian with native speakers and AI-powered lessons</p>
+                    </a>
+                    <a href="https://apps.apple.com/us/app/memrise-learn-languages/id635966718" target="_blank" class="resource-card">
+                        <h3>Memrise</h3>
+                        <p>Vocabulary learning with spaced repetition system</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 {% endblock %}
