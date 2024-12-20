@@ -155,6 +155,16 @@ def init_vocabulary():
 @learning.route('/learning/phrases/<int:lesson_number>', methods=['GET', 'POST'])
 def phrases_lesson(lesson_number):
     current_user = get_current_user()
+
+    translation = None
+    
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
+
     if current_user:
         mark_lesson_complete(current_user.id, 'phrases', lesson_number)
     
@@ -165,7 +175,8 @@ def phrases_lesson(lesson_number):
     return render_template('phrases_lesson.html',
                          items=phrase_items,
                          lesson_number=lesson_number,
-                         current_user=current_user)
+                         current_user=current_user,
+                         translation=translation)
 
 def init_phrases():
     if PhraseItem.query.first() is None:
@@ -253,6 +264,17 @@ def init_phrases():
 @learning.route('/learning/grammar/<int:lesson_number>', methods=['GET', 'POST'])
 def grammar_lesson(lesson_number):
     current_user = get_current_user()
+
+
+    translation = None
+    
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
+
     if current_user:
         mark_lesson_complete(current_user.id, 'grammar', lesson_number)
     if lesson_number not in [1, 2]:
@@ -262,7 +284,8 @@ def grammar_lesson(lesson_number):
     return render_template('grammar_lesson.html',
                          lesson=grammar_item,
                          lesson_number=lesson_number,
-                         current_user=current_user)
+                         current_user=current_user,
+                         translation=translation)
 
 def init_grammar():
     if GrammarLesson.query.first() is None:

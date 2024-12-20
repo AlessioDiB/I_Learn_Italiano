@@ -73,6 +73,16 @@ def save_writing_response():
 @practicing.route('/practicing/reading/<int:lesson_number>', methods=['GET', 'POST'])
 def reading_lesson(lesson_number):
     current_user = get_current_user()
+
+    translation = None
+    
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
+
     if current_user:
         mark_lesson_complete(current_user.id, 'reading_practice', lesson_number)
     
@@ -123,7 +133,8 @@ def reading_lesson(lesson_number):
     return render_template('reading_practice.html', 
                          exercise=exercise, 
                          lesson_number=lesson_number,
-                         current_user=current_user)
+                         current_user=current_user,
+                         translation=translation)
 
 @practicing.route('/practicing/check_answers/<int:lesson_number>', methods=['POST'])
 def check_answers(lesson_number):
@@ -147,6 +158,17 @@ def check_answers(lesson_number):
 @practicing.route('/practicing/pronunciation/<int:lesson_number>', methods=['GET', 'POST'])
 def pronunciation_lesson(lesson_number):
     current_user = get_current_user()
+
+
+    translation = None
+    
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
+
     if current_user:
         progress = UserProgress.query.filter_by(
             user_id=current_user.id,
@@ -187,7 +209,8 @@ def pronunciation_lesson(lesson_number):
     return render_template('pronunciation_practice.html',
                          exercises=exercises,
                          lesson_number=lesson_number,
-                         current_user=current_user)
+                         current_user=current_user,
+                         translation=translation)
 
 
 
@@ -204,6 +227,18 @@ def generate_audio(word):
 @practicing.route('/practicing/writing/<int:lesson_number>', methods=['GET', 'POST'])
 def writing_lesson(lesson_number):
     current_user = get_current_user()
+
+    translation = None
+    
+    if request.method == 'POST':
+        text = request.form.get('text')
+        direction = request.form.get('direction')
+        from_lang, to_lang = direction.split('-')
+        translator = Translator(from_lang=from_lang, to_lang=to_lang)
+        translation = translator.translate(text)
+
+
+
     if current_user:
         progress = UserProgress.query.filter_by(
             user_id=current_user.id,
@@ -248,4 +283,5 @@ def writing_lesson(lesson_number):
     return render_template('writing_practice.html',
                          exercise=exercise,
                          lesson_number=lesson_number,
-                         current_user=current_user)
+                         current_user=current_user,
+                         translation=translation)
