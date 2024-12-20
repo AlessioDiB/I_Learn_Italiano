@@ -1,0 +1,57 @@
+<!-- practicing.html -->
+{% extends 'base.html' %}
+{% block head %}
+<title>Practice Italian</title>
+{% endblock %}
+{% block body %}
+<div class="content">
+    <header class="section-header">
+        <h1>Practice Italian</h1>
+        <p class="section-description">Choose a practice category</p>
+    </header>
+
+    <div class="lessons-grid">
+        <div class="lesson-category">
+            <h2>Pronunciation Practice</h2>
+            <div class="lesson-buttons">
+                <a href="{{ url_for('practicing.pronunciation_lesson', lesson_number=1) }}" class="lesson-card">
+                    <h3>Lesson 1</h3>
+                    <p>Basic Sounds</p>
+                </a>
+                <a href="{{ url_for('practicing.pronunciation_lesson', lesson_number=2) }}" class="lesson-card">
+                    <h3>Lesson 2</h3>
+                    <p>Complex Sounds</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="lesson-category">
+            <h2>Writing Practice</h2>
+            <div class="lesson-buttons">
+                <a href="{{ url_for('practicing.writing_lesson', lesson_number=1) }}" class="lesson-card">
+                    <h3>Lesson 1</h3>
+                    <p>Simple Responses</p>
+                </a>
+                <a href="{{ url_for('practicing.writing_lesson', lesson_number=2) }}" class="lesson-card">
+                    <h3>Lesson 2</h3>
+                    <p>Using Vocabulary</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="lesson-category">
+            <h2>Reading Practice</h2>
+            <div class="lesson-buttons">
+                <a href="{{ url_for('practicing.reading_lesson', lesson_number=1) }}" class="lesson-card">
+                    <h3>Lesson 1</h3>
+                    <p>Simple Text</p>
+                </a>
+                <a href="{{ url_for('practicing.reading_lesson', lesson_number=2) }}" class="lesson-card">
+                    <h3>Lesson 2</h3>
+                    <p>Complex Text</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

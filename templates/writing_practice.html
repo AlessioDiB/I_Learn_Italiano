@@ -1,0 +1,67 @@
+<!-- writing_practice.html -->
+{% extends 'base.html' %}
+{% block head %}
+<title>Writing Practice {{ lesson_number }}</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <header class="lesson-header">
+        <h1>Writing Practice - Lesson {{ lesson_number }}</h1>
+        <p class="lesson-description">{{ exercise.title }}</p>
+    </header>
+
+    <div class="writing-section">
+        {% for prompt in exercise.prompts %}
+        <div class="writing-prompt">
+            <h3>{{ prompt.question }}</h3>
+            <input type="text" class="answer-input" placeholder="Type your answer here">
+            <button onclick="checkAnswer(this, '{{ prompt.expected }}')">Check</button>
+            <p class="feedback"></p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="lesson-navigation">
+        {% if lesson_number > 1 %}
+        <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous</a>
+        {% endif %}
+        {% if lesson_number < 2 %}
+        <a href="{{ url_for('practicing.writing_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next</a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function checkAnswer(button, expected) {
+    const input = button.previousElementSibling;
+    const feedback = button.nextElementSibling;
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = expected.toLowerCase();
+
+    if (userAnswer === correctAnswer) {
+        feedback.textContent = "Correct!";
+        feedback.style.color = "green";
+    } else {
+        feedback.textContent = `Incorrect. The answer is: ${expected}`;
+        feedback.style.color = "red";
+    }
+}
+</script>
+<div class="translation-box">
+    <div class="translation-header">
+        <h3>Translation Helper</h3>
+    </div>
+    <form method="POST" class="translation-form">
+        <select name="direction" class="translate-select">
+            <option value="it-en">Italian → English</option>
+            <option value="en-it">English → Italian</option>
+        </select>
+        <input type="text" name="text" class="translate-input" placeholder="Enter text...">
+        <button type="submit" class="translate-button">Translate</button>
+        {% if translation %}
+            <div class="translation-result">{{ translation }}</div>
+        {% endif %}
+</form>
+</div>
+{% endblock %}

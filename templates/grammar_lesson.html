@@ -1,0 +1,42 @@
+<!-- grammar_lesson.html -->
+{% extends 'base.html' %}
+{% block head %}
+<title>Grammar Lesson {{ lesson_number }}</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <header class="lesson-header">
+        <h1>{{ lesson.title }}</h1>
+    </header>
+
+    <div class="grammar-content">
+        {{ lesson.content|safe }}
+    </div>
+
+    <div class="lesson-navigation">
+        {% if lesson_number > 1 %}
+        <a href="{{ url_for('learning.grammar_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous Lesson</a>
+        {% endif %}
+        {% if lesson_number < 2 %}
+        <a href="{{ url_for('learning.grammar_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next Lesson</a>
+        {% endif %}
+    </div>
+</div>
+<div class="translation-box">
+    <div class="translation-header">
+        <h3>Translation Helper</h3>
+    </div>
+    <form method="POST" class="translation-form">
+        <select name="direction" class="translate-select">
+            <option value="it-en">Italian → English</option>
+            <option value="en-it">English → Italian</option>
+        </select>
+        <input type="text" name="text" class="translate-input" placeholder="Enter text...">
+        <button type="submit" class="translate-button">Translate</button>
+        {% if translation %}
+            <div class="translation-result">{{ translation }}</div>
+        {% endif %}
+</form>
+</div>
+{% endblock %}

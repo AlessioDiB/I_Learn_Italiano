@@ -9,12 +9,18 @@
 </head>
 <body>
     <div class="navbar">
+        <a href="{{ url_for('index') }}"><button class="green-button">Menu</button></a>
         <a href="/learning"><button class="yellow-button">Learning</button></a>
+        <a href="/practicing"><button class="yellow-button">Practicing</button></a>
         <a href="/extra-resources"><button class="yellow-button">Extra Resources</button></a>
-        <a href="/practising"><button class="yellow-button">Practising</button></a>
         <a href="/about"><button class="blue-button">About</button></a>
         <a href="/contact"><button class="blue-button">Contact</button></a>
-        <a href="/user"><button class="green-button">User</button></a>
+        {% if current_user %}
+            <a href="/logout"><button class="top-right-button">Logout</button></a>
+        {% else %}
+            <a href="/login"><button class="top-right-button">Login</button></a>
+        {% endif %}
+            <a href="{{ url_for('user_progress') }}"><button class="nav-button">My Progress</button></a>
     </div>
     {% block body %}{% endblock %}
 </body>

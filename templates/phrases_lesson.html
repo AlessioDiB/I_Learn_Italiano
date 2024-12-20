@@ -1,29 +1,25 @@
-<!-- vocabulary_lesson.html -->
-
 {% extends 'base.html' %}
-
 {% block head %}
-<title>Vocabulary Lesson {{ lesson_number }}</title>
+<title>Phrases Lesson {{ lesson_number }}</title>
 {% endblock %}
-
 {% block body %}
 <div class="content">
     <header class="lesson-header">
-        <h1>Vocabulary Lesson {{ lesson_number }}</h1>
+        <h1>Phrases Lesson {{ lesson_number }}</h1>
         {% if lesson_number == 1 %}
-        <p class="lesson-description">Basic everyday objects: house items and food</p>
+        <p class="lesson-description">Basic Italian Greetings and Common Phrases</p>
         {% else %}
-        <p class="lesson-description">Places and transportation</p>
+        <p class="lesson-description">Using Phrases with Vocabulary</p>
         {% endif %}
     </header>
 
-    <div class="vocabulary-grid">
+    <div class="phrases-grid">
         {% for item in items %}
-        <div class="vocabulary-card">
-            <img src="{{ item.image_url }}" alt="{{ item.english_word }}" class="vocab-image">
-            <div class="vocab-words">
-                <h3 class="italian">{{ item.italian_word }}</h3>
-                <p class="english">{{ item.english_word }}</p>
+        <div class="phrase-card">
+            <div class="phrase-content">
+                <h3 class="italian">{{ item.italian_phrase }}</h3>
+                <p class="pronunciation">Pronunciation: {{ item.pronunciation }}</p>
+                <p class="english">{{ item.english_phrase }}</p>
             </div>
         </div>
         {% endfor %}
@@ -31,11 +27,10 @@
 
     <div class="lesson-navigation">
         {% if lesson_number > 1 %}
-            <a href="{{ url_for('learning.vocabulary_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous Lesson</a>
+        <a href="{{ url_for('learning.phrases_lesson', lesson_number=lesson_number-1) }}" class="nav-button">Previous Lesson</a>
         {% endif %}
-        
         {% if lesson_number < 2 %}
-            <a href="{{ url_for('learning.vocabulary_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next Lesson</a>
+        <a href="{{ url_for('learning.phrases_lesson', lesson_number=lesson_number+1) }}" class="nav-button">Next Lesson</a>
         {% endif %}
     </div>
 </div>
@@ -53,6 +48,6 @@
         {% if translation %}
             <div class="translation-result">{{ translation }}</div>
         {% endif %}
-</form>
+    </form>
 </div>
 {% endblock %}

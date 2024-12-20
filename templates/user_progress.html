@@ -1,0 +1,135 @@
+<!-- user_progress.html -->
+{% extends 'base.html' %}
+{% block body %}
+<div class="content">
+    <header class="section-header">
+        <div class="header-box">
+            <h1>Your Learning Progress</h1>
+        </div>
+    </header>
+
+    <div class="progress-container">
+        <!-- Learning Progress -->
+        <div class="progress-section">
+            <h2>Learning Progress</h2>
+            <!-- Vocabulary -->
+            <h3>Vocabulary</h3>
+            <div class="progress-cards">
+                <div class="progress-card {% if vocabulary_progress.1 %}completed{% endif %}">
+                    <h3>Lesson 1</h3>
+                    <p>House Items and Food</p>
+                    {% if vocabulary_progress.1 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+                <div class="progress-card {% if vocabulary_progress.2 %}completed{% endif %}">
+                    <h3>Lesson 2</h3>
+                    <p>Places and Transportation</p>
+                    {% if vocabulary_progress.2 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Phrases -->
+            <h3>Phrases</h3>
+            <div class="progress-cards">
+                <div class="progress-card {% if phrases_progress.1 %}completed{% endif %}">
+                    <h3>Lesson 1</h3>
+                    <p>Basic Greetings</p>
+                    {% if phrases_progress.1 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+                <div class="progress-card {% if phrases_progress.2 %}completed{% endif %}">
+                    <h3>Lesson 2</h3>
+                    <p>Common Phrases</p>
+                    {% if phrases_progress.2 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Grammar -->
+            <h3>Grammar</h3>
+            <div class="progress-cards">
+                <div class="progress-card {% if grammar_progress.1 %}completed{% endif %}">
+                    <h3>Lesson 1</h3>
+                    <p>Italian Genders</p>
+                    {% if grammar_progress.1 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+                <div class="progress-card {% if grammar_progress.2 %}completed{% endif %}">
+                    <h3>Lesson 2</h3>
+                    <p>Alphabet and Pronunciation</p>
+                    {% if grammar_progress.2 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Progress -->
+        <div class="progress-section">
+            <h2>Practice Progress</h2>
+            <!-- Pronunciation -->
+            <h3>Pronunciation Practice</h3>
+            <div class="progress-cards">
+                <div class="progress-card {% if pronunciation_progress.1 %}completed{% endif %}">
+                    <h3>Lesson 1</h3>
+                    <p>Basic Sounds</p>
+                    {% if pronunciation_progress.1 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+                <div class="progress-card {% if pronunciation_progress.2 %}completed{% endif %}">
+                    <h3>Lesson 2</h3>
+                    <p>Complex Sounds</p>
+                    {% if pronunciation_progress.2 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Writing -->
+            <h3>Writing Practice</h3>
+            <div class="progress-cards">
+                <div class="progress-card {% if writing_progress.1 %}completed{% endif %}">
+                    <h3>Lesson 1</h3>
+                    <p>Simple Responses</p>
+                    {% if writing_progress.1 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+                <div class="progress-card {% if writing_progress.2 %}completed{% endif %}">
+                    <h3>Lesson 2</h3>
+                    <p>Using Vocabulary</p>
+                    {% if writing_progress.2 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Reading -->
+            <h3>Reading Practice</h3>
+            <div class="progress-cards">
+                <div class="progress-card {% if reading_progress.1 %}completed{% endif %}">
+                    <h3>Lesson 1</h3>
+                    <p>Simple Text</p>
+                    {% if reading_progress.1 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+                <div class="progress-card {% if reading_progress.2 %}completed{% endif %}">
+                    <h3>Lesson 2</h3>
+                    <p>Complex Text</p>
+                    {% if reading_progress.2 %}
+                        <span class="completion-mark">✓</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

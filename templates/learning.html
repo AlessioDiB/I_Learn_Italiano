@@ -1,3 +1,5 @@
+<!-- learning.html -->
+
 {% extends 'base.html' %}
 
 {% block head %}
@@ -31,30 +33,31 @@
         <div class="lesson-category">
             <h2>Phrases</h2>
             <div class="lesson-buttons">
-                <div class="lesson-card coming-soon">
+                <a href="{{ url_for('learning.phrases_lesson', lesson_number=1) }}" class="lesson-card">
                     <h3>Lesson 1</h3>
-                    <p>Coming Soon</p>
-                </div>
-                <div class="lesson-card coming-soon">
+                    <p>Basic Greetings and Common Phrases</p>
+                </a>
+                <a href="{{ url_for('learning.phrases_lesson', lesson_number=2) }}" class="lesson-card">
                     <h3>Lesson 2</h3>
-                    <p>Coming Soon</p>
-                </div>
+                    <p>Using Phrases with Vocabulary</p>
+                </a>
             </div>
         </div>
 
-        <!-- Grammar Section -->
+        <!-- grammar section in learning.html -->
         <div class="lesson-category">
             <h2>Basic Grammar</h2>
             <div class="lesson-buttons">
-                <div class="lesson-card coming-soon">
+                <a href="{{ url_for('learning.grammar_lesson', lesson_number=1) }}" class="lesson-card">
                     <h3>Lesson 1</h3>
-                    <p>Coming Soon</p>
-                </div>
-                <div class="lesson-card coming-soon">
+                    <p>Italian Genders and Grammar Overview</p>
+                </a>
+                <a href="{{ url_for('learning.grammar_lesson', lesson_number=2) }}" class="lesson-card">
                     <h3>Lesson 2</h3>
-                    <p>Coming Soon</p>
-                </div>
+                    <p>Italian Alphabet and Pronunciation</p>
+                </a>
             </div>
+        </div>
         </div>
     </div>
 </div>

@@ -291,3 +291,713 @@ body, html {
 .coming-soon:hover {
     transform: none;
 }
+
+
+.lesson-header {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;  /* Center align the text */
+    width: 100%;         /* Full width */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Optional: adds subtle shadow */
+}
+
+.lesson-header h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.lesson-description {
+    margin: 0;
+    color: #666;
+}
+
+/* Make sure the content div has proper spacing */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centers content horizontally */
+}
+
+/* Ensure vocabulary grid is properly aligned */
+.vocabulary-grid {
+    width: 100%;         /* Full width */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;     /* Add vertical padding */
+}
+
+/* Main sections headers */
+.section-header {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.section-header h1 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.section-description {
+    margin: 0;
+    color: #666;
+    font-size: 1.2em;
+}
+
+
+/* For Phrases */
+.phrases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.phrase-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.phrase-card:hover {
+    transform: translateY(-5px);
+}
+
+.phrase-content {
+    text-align: center;
+}
+
+.phrase-content .italian {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.phrase-content .pronunciation {
+    color: #666;
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.phrase-content .english {
+    color: #444;
+    font-size: 1.2em;
+}
+
+
+/* Grammar Lessons */
+
+.grammar-content {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.grammar-content h3 {
+    color: #333;
+    margin-top: 25px;
+}
+
+.grammar-content ul {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+
+
+/* Green Button Menu */
+
+.green-button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.green-button:hover {
+    transform: scale(1.1);
+    background-color: #3e8e41;
+}
+
+
+
+
+
+/* practicing part */
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+ }
+ 
+ .practice-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+ }
+ 
+ 
+ .writing-prompt, .reading-text {
+    margin-bottom: 20px;
+ }
+ 
+ 
+ .check-answer {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    margin: 20px 0;
+    cursor: pointer;
+ }
+ 
+ .question-card {
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+ }
+ 
+ .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+ }
+ 
+ .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+ }
+
+
+/* reading practicing part */
+
+
+ .lesson-header {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.practice-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px auto;
+    text-align: center;
+    width: 90%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.writing-prompt, .example-answer {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.writing-area {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.response-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+
+
+
+
+.practice-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.reading-text {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.text-content {
+    white-space: pre-wrap;
+    font-family: inherit;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.questions-section {
+    margin-top: 30px;
+}
+
+.questions-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.question-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.question-text {
+    font-size: 1.1em;
+    color: #333;
+    margin: 10px 0;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option label {
+    cursor: pointer;
+}
+
+.submit-button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    margin: 20px auto;
+    display: block;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.submit-button:hover {
+    background: #45a049;
+}
+
+
+/* reading practicing check answer */
+.alert {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* pronounciation practicing */
+.pronunciation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.pronunciation-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.pronunciation-card h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.pronunciation-card .english {
+    color: #666;
+    margin: 5px 0;
+}
+
+.pronunciation-card .phonetic {
+    color: #888;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+.play-button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background: #45a049;
+}
+
+
+
+/* writing practicing */
+
+.writing-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.writing-prompt {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.answer-input {
+    width: 60%;  /* Reduced from 100% */
+    padding: 10px;
+    margin: 10px auto;  /* Added auto margins */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;  /* Makes it a block element */
+}
+
+.feedback {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+/* Log in/Sign up */
+
+.auth-container {
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+
+.header-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    min-width: 200px;
+}
+
+
+.auth-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+.auth-form input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: white;
+    text-align: center;
+}
+
+
+.signup-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+
+/* User progress */
+
+.progress-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.progress-section {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.progress-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.progress-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.progress-card {
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+}
+
+.progress-card.completed {
+    background: #e8f5e9;
+}
+
+.completion-mark {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #4CAF50;
+    font-size: 24px;
+}
+
+/* About and Content */
+
+
+.content-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 0 auto;
+    text-align: center;
+    width: 800px;  /* Increased width */
+    min-height: 300px;  /* Added height */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+ }
+.content {
+    position: relative;
+    min-height: 100vh;
+}
+
+
+/* Translation box */
+
+.translation-box {
+    position: fixed;
+    right: 30px;
+    top: 40%;
+    transform: translateY(-40%);
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 280px;
+    padding: 15px;
+}
+
+
+.translation-form > * {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.translation-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.translation-content {
+    padding: 15px;
+}
+
+.translate-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.translate-input {
+    width: calc(100% - 2px); /* Adjust width for padding */
+    box-sizing: border-box; /* Includes padding in width */
+    padding: 8px;
+    margin: 0 auto; /* Centers horizontally */
+    margin-bottom: 10px;
+    display: block; /* Ensures proper block alignment */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+.translate-button {
+    width: 100%;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.translate-button:hover {
+    background-color: #45a049;
+}
+
+.translation-result {
+    margin-top: 10px;
+    padding: 8px;
+    min-height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    word-wrap: break-word;
+    display: block; /* Ensures proper block alignment */
+    width: calc(100% - 2px); /* Adjust width for padding */
+    max-width: 100%; /* Prevent overflow */
+    box-sizing: border-box; /* Includes padding in width */
+}
+
+
+
+/* Extra Resources section */
+
+.resource-section {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+/* Make sure grid stays inside */
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Reduced minimum width */
+    gap: 15px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.resource-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.resource-card h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.resource-card p {
+    color: #666;
+    margin: 0;
+}
+
+.content-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px auto;
+    width: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Keep header always visible */
+.content-box h1,
+.content-box .section-description {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 10px 0;
+    margin: 0;
+    z-index: 1;
+}
+
+/* Container for scrollable content */
+.resources-container {
+    overflow-y: auto;
+    max-height: calc(80vh - 100px);  /* Adjust based on header height */
+    padding: 20px 0;
+}
